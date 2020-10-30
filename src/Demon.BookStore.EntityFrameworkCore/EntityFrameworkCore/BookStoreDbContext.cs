@@ -1,4 +1,5 @@
-﻿using Demon.BookStore.Books;
+﻿using Demon.BookStore.Authors;
+using Demon.BookStore.Books;
 using Microsoft.EntityFrameworkCore;
 using Demon.BookStore.Users;
 using Volo.Abp.Data;
@@ -28,6 +29,9 @@ namespace Demon.BookStore.EntityFrameworkCore
          */
 
         public DbSet<Book> Books { get; set; }
+        
+        public DbSet<Author> Authors { get; set; }
+
         public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
             : base(options)
         {

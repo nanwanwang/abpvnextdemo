@@ -1,16 +1,17 @@
 ﻿using System.Threading.Tasks;
 using Demon.BookStore.Localization;
+using Demon.BookStore.Permissions;
 using Volo.Abp.UI.Navigation;
 
 namespace Demon.BookStore.Blazor
 {
     public class BookStoreMenuContributor : IMenuContributor
     {
-        public Task ConfigureMenuAsync(MenuConfigurationContext context)
+        public async Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
             if(context.Menu.DisplayName != StandardMenus.Main)
             {
-                return Task.CompletedTask;
+              return;
             }
 
             var l = context.GetLocalizer<BookStoreResource>();
@@ -24,17 +25,32 @@ namespace Demon.BookStore.Blazor
                     icon: "fas fa-home"
                 )
             );
-            context.Menu.AddItem(new ApplicationMenuItem(
+            // context.Menu.AddItem(new ApplicationMenuItem(
+            //     "BooksStore",
+            //     l["Menu:BookStore"],
+            //     icon: "fa fa-book"
+            // )).AddItem(new ApplicationMenuItem(
+            //     "BooksStore.Books",
+            //     l["Menu:Books"],
+            //     url: "/books"
+            // ));
+            
+            var bookStoreMenu = new ApplicationMenuItem(
                 "BooksStore",
                 l["Menu:BookStore"],
                 icon: "fa fa-book"
-            )).AddItem(new ApplicationMenuItem(
-                "BooksStore.Books",
-                l["Menu:Books"],
-                url: "/books"
-            ));
+            );
 
-            return Task.CompletedTask;
+            context.Menu.AddItem(bookStoreMenu);
+            if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+            {
+                bookStoreMenu.AddItem(new ApplicationMenuItem(
+                    "BooksStore.Books",
+                    l["Menu:Books"],
+                    url: "/books"
+                ));
+            }
+
         }
     }
 }

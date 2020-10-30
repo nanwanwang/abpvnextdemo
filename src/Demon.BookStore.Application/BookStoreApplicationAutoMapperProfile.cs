@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Demon.BookStore.Authors;
 using Demon.BookStore.Books;
 
 namespace Demon.BookStore
@@ -12,6 +13,10 @@ namespace Demon.BookStore
              * into multiple profile classes for a better organization. */
             CreateMap<Book, BookDto>();
             CreateMap<CreateUpdateBookDto, Book>();
+
+            CreateMap<Author, AuthorDto>();
+            CreateMap<AuthorDto, Author>();
+            
         }
     }
 }

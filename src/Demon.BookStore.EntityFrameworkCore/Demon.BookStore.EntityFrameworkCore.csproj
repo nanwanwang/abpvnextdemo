@@ -9,6 +9,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Demon.BookStore.Domain\Demon.BookStore.Domain.csproj" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.5" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" Version="3.3.0" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="3.3.0" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="3.3.0" />
